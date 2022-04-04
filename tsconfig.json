@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",                                /* Specify what module code is generated. */
+     "rootDir": "./src",                         /* Allow accessing UMD globals from modules. */
+     "baseUrl": "./src",
+     "resolveJsonModule": true,            
+     "outDir": "dist",                       
+    "esModuleInterop": true,                 
+    "forceConsistentCasingInFileNames": true,     
+    "strict": true,              
+    //"strictPropertyInitialization": false,                   
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  }
+}
