@@ -3,11 +3,8 @@ import { Request, Response, NextFunction } from 'express'
 import { User } from '../../../../../domain/entities/User'
 import { UserCreatorUseCase } from '../../../../../application/usecases/UserCreator'
 import { MongoDBUserRepository } from '../../../../implementations/MongoDB/MongoDBUserRepository'
-import { MongoDB } from '../../../../../infrastructure/driven-adapters/MongoDB'
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const db = new MongoDB()
-  await db.connectDB()
   const {
     username,
     age,
