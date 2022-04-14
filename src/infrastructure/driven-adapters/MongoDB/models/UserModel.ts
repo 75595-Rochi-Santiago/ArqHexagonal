@@ -8,10 +8,22 @@ class Users implements User {
   name?: string
 
   @prop({ trim: true })
+  lastname?: string
+
+  @prop({ trim: true })
   username?: string
 
-  @prop()
-  age?: number
+  @prop({ trim: true })
+  email?: string
+
+  @prop({ trim: true })
+  password?: string
+
+  @prop({ trim: true })
+  city?: string
+
+  @prop({ trim: true })
+  province?: string
 }
 const UserModel = getModelForClass(Users)
 export default UserModel

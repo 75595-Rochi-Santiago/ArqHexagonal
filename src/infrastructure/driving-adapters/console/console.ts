@@ -15,7 +15,6 @@ import { MongoDBUserRepository } from '../../implementations/MongoDB/MongoDBUser
     const userCreatorUseCase = new UserCreatorUseCase(mongoDBUserRepository)
     const userToCreate: User = {
       name: 'santi',
-      age: 23,
       username: 'bang',
       id: '7'
     }

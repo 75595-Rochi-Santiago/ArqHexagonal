@@ -13,7 +13,11 @@ export class MongoDBUserRepository implements UserRepository {
       id: user.id,
       name: user.name,
       username: user.username,
-      age: user.age
+      lastname: user.lastname,
+      email: user.email,
+      password: user.password,
+      city: user.city,
+      province: user.province
     })
     await newUser.save()
     return user
@@ -25,7 +29,11 @@ export class MongoDBUserRepository implements UserRepository {
       {
         name: user.name,
         username: user.username,
-        age: user.age
+        lastname: user.lastname,
+        email: user.email,
+        password: user.password,
+        city: user.city,
+        province: user.province
       }, { new: true })
     console.log('updatedUser---------------', updatedUser)
     return user

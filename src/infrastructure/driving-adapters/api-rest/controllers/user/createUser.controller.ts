@@ -6,9 +6,13 @@ import { MongoDBUserRepository } from '../../../../implementations/MongoDB/Mongo
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const {
+    name,
+    lastname,
     username,
-    age,
-    name
+    email,
+    password,
+    city,
+    province
   } = req.body
   const mongoDBUserRepository = new MongoDBUserRepository()
   const userCreatorUseCase = new UserCreatorUseCase(mongoDBUserRepository)
@@ -16,8 +20,12 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
   const userToCreate: User = {
     id: uuidv4(),
     name,
+    lastname,
     username,
-    age
+    email,
+    password,
+    city,
+    province
   }
   console.log('Usuario a crear pa: ', userToCreate)
   try {
