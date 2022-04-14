@@ -14,7 +14,8 @@ export class UserDeleterUseCase {
 
   async run (userId: string): Promise<User> {
     const userToDelete = await this._userGetterById.run(userId)
-    await this._userRepository.delete(userToDelete)
+    console.log('user to delete: ', userToDelete)
+    await this._userRepository.delete(userId)
     return userToDelete
   }
 }

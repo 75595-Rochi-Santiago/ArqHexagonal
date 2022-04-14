@@ -1,7 +1,6 @@
-import { v4 as uuidv4 } from 'uuid'
 import { Request, Response, NextFunction } from 'express'
 import { User } from '../../../../../domain/entities/User'
-import { UserCreatorUseCase } from '../../../../../application/usecases/UserCreator'
+import { UserCreatorUseCase } from '../../../../../application/usecases/User/UserCreator'
 import { MongoDBUserRepository } from '../../../../implementations/MongoDB/MongoDBUserRepository'
 
 export const createUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -18,7 +17,6 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
   const userCreatorUseCase = new UserCreatorUseCase(mongoDBUserRepository)
 
   const userToCreate: User = {
-    id: uuidv4(),
     name,
     lastname,
     username,

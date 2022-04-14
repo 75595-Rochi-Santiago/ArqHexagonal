@@ -4,7 +4,8 @@ export interface UserRepository {
   getAll: () => Promise<User[]>
   save: (user: User) => Promise<User>
   update: (user: User) => Promise<User>
-  delete: (user: User) => Promise<void>
+  delete: (id: string) => Promise<void>
   getByUserName: (username: string) => Promise<User | null>
   getById: (id: string) => Promise<User | null>
+  getByEmail: (email: string) => Promise<User | null>
 }

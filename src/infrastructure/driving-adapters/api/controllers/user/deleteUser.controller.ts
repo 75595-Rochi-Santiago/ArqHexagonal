@@ -1,18 +1,17 @@
 import { Request, Response, NextFunction } from 'express'
-import { UserGetterUseCase } from '../../../../../application/usecases/UserGetter'
 import { MongoDBUserRepository } from '../../../../implementations/MongoDB/MongoDBUserRepository'
+import { UserDeleterUseCase } from '../../../../../application/usecases/User/UserDeleter'
 
-export const getAllUsers = async (
+export const deleteUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
+  const id = req.params.id
   const mongoDBUserRepository = new MongoDBUserRepository()
-  const userGetterUseCase = new UserGetterUseCase(mongoDBUserRepository)
-
+  const userDeleterUseCase = new UserDeleterUseCase(mongoDBUserRepository)
   try {
-    const allUsers = await userGetterUseCase.run()
-    res.json(allUsers)
+    await userDeleterUseCase.run(id)
     return
   } catch (error) {
     // evalua middlewares de errores controlados y errores no controlados

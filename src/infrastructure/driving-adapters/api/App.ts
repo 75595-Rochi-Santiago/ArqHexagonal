@@ -1,4 +1,4 @@
-import { MongoDB } from '../../../infrastructure/driven-adapters/MongoDB'
+import { MongoDB } from '../../driven-adapters/MongoDB'
 import { Server } from './Server'
 
 export class App {

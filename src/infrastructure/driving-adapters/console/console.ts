@@ -1,9 +1,9 @@
-import { UserCreatorUseCase } from '../../../application/usecases/UserCreator'
+import { UserCreatorUseCase } from '../../../application/usecases/User/UserCreator'
 // import { InMemoryUserRepository } from '../../implementations/inMemory/inMemoryUserRepository'
 import { User } from '../../../domain/entities/User'
-import { UserGetterUseCase } from '../../../application/usecases/UserGetter/index'
-import { UserUpdaterUseCase } from '../../../application/usecases/UserUpdater/index'
-import { UserDeleterUseCase } from '../../../application/usecases/UserDeleter/index'
+import { UserGetterUseCase } from '../../../application/usecases/User/UserGetter'
+import { UserUpdaterUseCase } from '../../../application/usecases/User/UserUpdater'
+import { UserDeleterUseCase } from '../../../application/usecases/User/UserDeleter'
 import { MongoDB } from '../../driven-adapters/MongoDB/index'
 import { MongoDBUserRepository } from '../../implementations/MongoDB/MongoDBUserRepository';
 (async () => {

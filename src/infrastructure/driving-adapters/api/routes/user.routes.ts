@@ -1,14 +1,16 @@
 import { Router } from 'express'
 import {
   createUserController,
-  getAllUsersController
+  getAllUsersController,
+  deleteUserController,
+  updateUserController
 } from '../controllers/index'
 
 const route = Router()
 
 route.get('', getAllUsersController)
 route.post('', createUserController)
-// route.put('/:id', updateUserController)
-// route.delete('/:id', deleteUserController)
+route.put('', updateUserController)
+route.delete('/:id', deleteUserController)
 
 export default route

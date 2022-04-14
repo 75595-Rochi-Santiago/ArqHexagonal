@@ -6,16 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-console-app": "npx nodemon ./src/infrastructure/driving-adapters/console/console.ts",
-    "start-rest-app": "npx nodemon ./src/infrastructure/driving-adapters/api-rest/index.ts"
+    "start-rest-app": "npx nodemon ./src/infrastructure/driving-adapters/api/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@typegoose/typegoose": "^9.7.1",
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^8.5.8",
     "aws-sdk": "^2.1098.0",
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
     "uuid": "^8.3.2"
   },

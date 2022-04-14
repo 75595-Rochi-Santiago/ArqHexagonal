@@ -10,7 +10,6 @@ export class MongoDBUserRepository implements UserRepository {
 
   async save (user: User): Promise<User> {
     const newUser = new UserModel({
-      id: user.id,
       name: user.name,
       username: user.username,
       lastname: user.lastname,
@@ -25,7 +24,7 @@ export class MongoDBUserRepository implements UserRepository {
 
   async update (user: User): Promise<User> {
     const updatedUser = await UserModel.updateOne(
-      { id: user.id },
+      { email: user.email },
       {
         name: user.name,
         username: user.username,
@@ -34,13 +33,15 @@ export class MongoDBUserRepository implements UserRepository {
         password: user.password,
         city: user.city,
         province: user.province
-      }, { new: true })
+      },
+      { new: true }
+    )
     console.log('updatedUser---------------', updatedUser)
     return user
   }
 
-  async delete (user: User): Promise<void> {
-    await UserModel.findOneAndDelete({ id: user.id })
+  async delete (id: string): Promise<void> {
+    await UserModel.findByIdAndDelete(id)
   }
 
   async getByUserName (username: string): Promise<User | null> {
@@ -50,6 +51,11 @@ export class MongoDBUserRepository implements UserRepository {
 
   async getById (id: string): Promise<User | null> {
     const user = await UserModel.findOne({ id })
+    return user
+  }
+
+  async getByEmail (email: string): Promise<User | null> {
+    const user = await UserModel.findOne({ email })
     return user
   }
 }
