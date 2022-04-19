@@ -1,6 +1,7 @@
 import { User } from '../../../domain/entities/User'
 import UserModel from '../../driven-adapters/MongoDB/models/UserModel'
 import { UserRepository } from '../../../domain/repositories/UserRepository'
+import bcrypt from 'bcrypt'
 
 export class MongoDBUserRepository implements UserRepository {
   async getAll (): Promise<User[]> {
@@ -9,23 +10,10 @@ export class MongoDBUserRepository implements UserRepository {
   }
 
   async save (user: User): Promise<User> {
-    const newUser = new UserModel({
-      name: user.name,
-      username: user.username,
-      lastname: user.lastname,
-      email: user.email,
-      password: user.password,
-      city: user.city,
-      province: user.province
-    })
-    await newUser.save()
-    return user
-  }
-
-  async update (user: User): Promise<User> {
-    const updatedUser = await UserModel.updateOne(
-      { email: user.email },
-      {
+    if (user.password !== undefined) {
+      const salt = bcrypt.genSaltSync()
+      user.password = bcrypt.hashSync(user.password, salt)
+      const newUser = new UserModel({
         name: user.name,
         username: user.username,
         lastname: user.lastname,
@@ -33,10 +21,33 @@ export class MongoDBUserRepository implements UserRepository {
         password: user.password,
         city: user.city,
         province: user.province
-      },
-      { new: true }
-    )
-    console.log('updatedUser---------------', updatedUser)
+      })
+      await newUser.save()
+    }
+    return user
+  }
+
+  async update (user: User): Promise<User > {
+    if (user.password !== undefined) {
+      bcrypt.hash(user.password, 10, function (err, hash) {
+        if (err != null) { throw new Error() }
+        user.password = hash
+      })
+      const updatedUser = await UserModel.updateOne(
+        { email: user.email },
+        {
+          name: user.name,
+          username: user.username,
+          lastname: user.lastname,
+          email: user.email,
+          password: user.password,
+          city: user.city,
+          province: user.province
+        },
+        { new: true }
+      )
+      console.log('updatedUser---------------', updatedUser)
+    }
     return user
   }
 
@@ -56,6 +67,7 @@ export class MongoDBUserRepository implements UserRepository {
 
   async getByEmail (email: string): Promise<User | null> {
     const user = await UserModel.findOne({ email })
+    console.log('user...', user?._id.toString())
     return user
   }
 }

@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { JWTManager } from '../security/jwt-manager'
 import {
   createUserController,
   getAllUsersController,
@@ -8,9 +9,9 @@ import {
 
 const route = Router()
 
-route.get('', getAllUsersController)
-route.post('', createUserController)
-route.put('', updateUserController)
-route.delete('/:id', deleteUserController)
+route.get('', [JWTManager.verifyToken], getAllUsersController)
+route.post('', [JWTManager.verifyToken], createUserController)
+route.put('', [JWTManager.verifyToken], updateUserController)
+route.delete('/:id', [JWTManager.verifyToken], deleteUserController)
 
 export default route
