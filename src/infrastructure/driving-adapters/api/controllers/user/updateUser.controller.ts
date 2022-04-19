@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import { User } from '../../../../../domain/entities/User'
 import { UserUpdaterUseCase } from '../../../../../application/usecases/User/UserUpdater'
 import { MongoDBUserRepository } from '../../../../implementations/MongoDB/MongoDBUserRepository'
+import { Users } from '../../../../driven-adapters/MongoDB/models/UserModel'
+import { InvalidPropertyError } from '../../../../../domain/exceptions/errors'
 
 export const updateUser = async (
   req: Request,
@@ -24,8 +26,16 @@ export const updateUser = async (
   }
   console.log('Datos a actualizar: ', userToUpdate)
   try {
-    const userUpdated = await userUpdaterUseCase.run(userToUpdate)
-    res.json(userUpdated)
+    const valid = await Users.validate(userToUpdate, false)
+    if (valid) {
+      const userUpdated = await userUpdaterUseCase.run(userToUpdate)
+      res.json(userUpdated)
+    } else {
+      throw new InvalidPropertyError(
+        'Invalid input JOI',
+        'JOI invalid input'
+      )
+    }
     return
   } catch (error) {
     // evalua middlewares de errores controlados y errores no controlados
