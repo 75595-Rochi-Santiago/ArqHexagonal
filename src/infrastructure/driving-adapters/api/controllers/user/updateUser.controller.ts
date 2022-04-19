@@ -24,7 +24,6 @@ export const updateUser = async (
     city,
     province
   }
-  console.log('Datos a actualizar: ', userToUpdate)
   try {
     const valid = await Users.validate(userToUpdate, false)
     if (valid) {

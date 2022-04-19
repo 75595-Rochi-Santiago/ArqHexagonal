@@ -27,7 +27,6 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     city,
     province
   }
-  console.log('Usuario a crear pa: ', userToCreate)
   try {
     const valid = await Users.validate(userToCreate)
     if (valid) {

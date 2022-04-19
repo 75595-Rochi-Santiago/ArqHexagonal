@@ -1,4 +1,4 @@
-import { UserCreatorUseCase } from '../../../application/usecases/User/UserCreator'
+/* import { UserCreatorUseCase } from '../../../application/usecases/User/UserCreator'
 // import { InMemoryUserRepository } from '../../implementations/inMemory/inMemoryUserRepository'
 import { User } from '../../../domain/entities/User'
 import { UserGetterUseCase } from '../../../application/usecases/User/UserGetter'
@@ -43,3 +43,4 @@ import { MongoDBUserRepository } from '../../implementations/MongoDB/MongoDBUser
     console.log(error)
   }
 })()
+*/

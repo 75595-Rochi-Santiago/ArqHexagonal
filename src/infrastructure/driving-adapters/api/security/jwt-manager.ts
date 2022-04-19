@@ -6,8 +6,6 @@ export class JWTManager {
   static async generateJWT (uid: string): Promise<any> {
     const config = new Config()
 
-    console.log(config.JWT.KEY)
-    console.log(uid)
     return await new Promise((resolve, reject) => {
       if (config.JWT.KEY !== undefined) {
         const payload = { uid }
